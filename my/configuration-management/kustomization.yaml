@@ -1,0 +1,4 @@
+resources:
+  - k8s-configs/my-namespace/my-pod.yaml
+  - k8s-configs/my-namespace/my-service.yaml
+  - k8s-configs/my-namespace/my-namespace.yaml
