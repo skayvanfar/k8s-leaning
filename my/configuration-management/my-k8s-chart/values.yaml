@@ -1,0 +1,8 @@
+namespace: my-namespace
+podName: my-pod
+serviceName: my-service
+appLabel: nginx
+image:
+  repository: nginx
+  tag: latest
+  port: 80
