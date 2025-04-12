@@ -5,10 +5,11 @@ metadata:
   namespace: my-namespace
 spec:
   selector:
-    app: nginx # This will select the nginx-pod based on the label app=nginx
+    app: my-app # This will select the nginx-pod based on the label my-app
   ports:
     - protocol: TCP
       port: 80  # The port on which the service will be accessible
       targetPort: 80  # The port on the pod to which traffic will be forwarded
-  type: ClusterIP  # Exposes the service inside the cluster
+      nodePort: 30080  # Exposed on each node
+  type: NodePort  # Exposes the service outside the cluster
   
