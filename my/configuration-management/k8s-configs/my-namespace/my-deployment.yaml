@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-pod
+  namespace: my-namespace
+  labels:
+    app: my-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+          env:
+            - name: WELCOME_MSG
+              valueFrom:
+                configMapKeyRef:
+                  name: my-config
+                  key: WELCOME_MSG
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: my-secret
+                  key: apiKey
+          volumeMounts:
+            - name: html
+              mountPath: /usr/share/nginx/html
+      volumes:
+        - name: html
+          persistentVolumeClaim:
+            claimName: my-pvc

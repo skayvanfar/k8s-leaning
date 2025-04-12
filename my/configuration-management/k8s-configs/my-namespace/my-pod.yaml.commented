@@ -1,3 +1,4 @@
+# no need this, since using deployment.yaml
 apiVersion: v1
 kind: Pod
 metadata:
