@@ -37,3 +37,4 @@ override.tf.json
 terraform.rc
 /.idea/
 /my/iaac/.terraform.lock.hcl
+/my/configuration-management/pulumi/target/
