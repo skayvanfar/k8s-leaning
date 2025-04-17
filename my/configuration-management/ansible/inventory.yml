@@ -1,0 +1,2 @@
+# ansible/inventory.yml
+localhost ansible_connection=local

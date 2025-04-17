@@ -1,0 +1,6 @@
+# ansible/vars.yml
+namespace: "my-namespace"
+deployment_name: "my-deployment"
+service_name: "my-service"
+image: "nginx:latest"
+container_port: 80

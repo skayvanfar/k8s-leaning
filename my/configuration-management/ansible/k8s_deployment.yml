@@ -1,0 +1,62 @@
+---
+- name: Deploy Nginx on Kubernetes
+  hosts: localhost  # Run locally to interact with Kubernetes
+  gather_facts: false
+  vars_files:
+    - vars.yml  # Import variable definitions
+
+  tasks:
+    - name: Create Kubernetes Namespace
+      community.kubernetes.k8s:
+        kubeconfig: "{{ lookup('env', 'KUBECONFIG') }}"  # Using the Kubeconfig to interact with the cluster
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            name: "{{ namespace }}"
+
+    - name: Create Kubernetes Deployment for Nginx
+      community.kubernetes.k8s:
+        kubeconfig: "{{ lookup('env', 'KUBECONFIG') }}"
+        state: present
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: "{{ deployment_name }}"
+            namespace: "{{ namespace }}"
+          spec:
+            replicas: 2  # Number of pods
+            selector:
+              matchLabels:
+                app: nginx
+            template:
+              metadata:
+                labels:
+                  app: nginx
+              spec:
+                containers:
+                  - name: nginx
+                    image: "{{ image }}"
+                    ports:
+                      - containerPort: "{{ container_port }}"
+
+    - name: Expose Nginx Deployment with a Service
+      community.kubernetes.k8s:
+        kubeconfig: "{{ lookup('env', 'KUBECONFIG') }}"
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: "{{ service_name }}"
+            namespace: "{{ namespace }}"
+          spec:
+            selector:
+              app: nginx
+            ports:
+              - protocol: TCP
+                port: 80
+                targetPort: 80
+            type: NodePort
