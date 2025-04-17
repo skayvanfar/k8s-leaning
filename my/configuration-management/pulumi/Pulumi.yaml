@@ -1,0 +1,7 @@
+name: my
+description: configuration management by pulumi
+runtime: java
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: kubernetes-java
