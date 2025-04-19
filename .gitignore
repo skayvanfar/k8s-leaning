@@ -36,5 +36,6 @@ override.tf.json
 .terraformrc
 terraform.rc
 /.idea/
-/my/iaac/.terraform.lock.hcl
+/my/iaac/terraform/.terraform.lock.hcl
 /my/configuration-management/pulumi/target/
+/my/iaac/vagrant/.vagrant/
