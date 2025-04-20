@@ -15,6 +15,7 @@ spec:
       labels:
         app: my-app
     spec:
+      serviceAccountName: app-sa  # Service account for the deployment
       containers:
         - name: nginx
           image: nginx
