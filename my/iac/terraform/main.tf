@@ -7,7 +7,7 @@ provider "null" {
 resource "null_resource" "minikube_start" {
   provisioner "local-exec" {
     command = <<-EOT
-      minikube start --driver=docker --nodes 2 -p multinode-cluster
+      minikube start --driver=docker
       # Wait for Minikube to be fully initialized (this can be adjusted based on your environment)
       minikube kubectl -- get nodes
     EOT

@@ -13,3 +13,9 @@ kubectl wait --for=condition=Established namespace/my-namespace --timeout=1s
 for file in $CONFIG_DIR/*.yaml; do
   kubectl apply -f "$file"
 done
+
+# Wait for the PersistentVolumeClaim to be bound
+kubectl wait --for=condition=bound --timeout=600s pvc/my-pvc -n my-namespace
+
+# Now you can safely run the Job
+kubectl apply -f "$CONFIG_DIR/content-writer-job.yaml"

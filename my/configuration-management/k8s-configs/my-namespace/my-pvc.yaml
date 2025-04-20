@@ -4,8 +4,10 @@ metadata:
   name: my-pvc
   namespace: my-namespace
 spec:
+  volumeName: hostpath-pv              # 👈 Bind to the specific PV
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
+  storageClassName: "pv"  # Use the default storage class
